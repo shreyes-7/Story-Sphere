@@ -1,0 +1,134 @@
+:root {
+  --bg-color: #1c1c1c;
+  --text-color: #e0e0e0;
+  --primary-color: #ff5722;
+  --secondary-color: #444444;
+  --input-bg-color: #555555;
+  --input-focus-color: #666666;
+  --border-color: rgba(255, 255, 255, 0.4);
+  --button-bg-color: #ff5722;
+  --button-hover-color: #ff704d;
+  --font-family: 'Roboto', sans-serif;
+  --link-color: #ff5722;
+}
+
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.register {
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6)
+  ),
+  url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.registerTitle {
+  font-size: 60px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.registerForm {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+}
+
+.registerForm > label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.registerInput {
+  padding: 14px;
+  background-color: var(--input-bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-color);
+  font-size: 18px;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.registerInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: var(--input-focus-color);
+}
+
+.registerButton {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.registerButton:hover {
+  background-color: var(--button-hover-color);
+}
+
+.registerLoginButton {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 12px;
+  border: 2px solid whitesmoke;
+  color: var(--primary-color);
+  border-radius: 12px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.registerLoginButton:hover {
+  background-color: whitesmoke;
+  color: whitesmoke;
+}
+
+@media (max-width: 768px) {
+  .registerTitle {
+    font-size: 40px;
+  }
+
+  .registerForm {
+    padding: 20px;
+  }
+
+  .registerInput {
+    font-size: 16px;
+  }
+
+  .registerButton, .registerLoginButton {
+    font-size: 16px;
+  }
+}

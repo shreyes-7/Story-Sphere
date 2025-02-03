@@ -1,0 +1,149 @@
+/* Dark Mode Theme */
+.write {
+  background-color: #121212;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Image Preview */
+.writeImg {
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.writeImg:hover {
+  transform: scale(1.02);
+}
+
+/* Form Styles */
+.writeForm {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 10px;
+  width: 60%;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.writeFormGroup {
+  margin-bottom: 20px;
+}
+
+/* Upload Button */
+.writeIcon {
+  background: #222;
+  color: #76c7c0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.writeIcon:hover {
+  background: #333;
+}
+
+/* Title & Text Input */
+.writeInput {
+  width: 100%;
+  background: #252525;
+  border: none;
+  padding: 15px;
+  font-size: 18px;
+  color: #e0e0e0;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.writeInput::placeholder {
+  color: #b0b0b0;
+}
+
+.writeInput:focus {
+  outline: none;
+  border: 1px solid #76c7c0;
+}
+
+/* Category Input */
+.writeCategory {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  background: #252525;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.writeCategory::placeholder {
+  color: #b0b0b0;
+}
+
+.writeCategory:focus {
+  outline: none;
+  border: 1px solid #76c7c0;
+}
+
+
+
+/* Textarea */
+.writeText {
+  height: 200px;
+  resize: none;
+}
+
+/* Button Group */
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.writeSubmit, .clearButton, .exportButton {
+  background: #76c7c0;
+  color: #121212;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.clearButton {
+  background: #ff4d4d;
+}
+
+.exportButton {
+  background: #ffa726;
+}
+
+.writeSubmit:hover {
+  background: #5ea9a0;
+}
+
+.clearButton:hover {
+  background: #ff1a1a;
+}
+
+.exportButton:hover {
+  background: #ff9800;
+}

@@ -1,0 +1,134 @@
+
+.topbar {
+  width: 100%;
+  height: 70px;
+  background-color: #0d0d0d; 
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+/* Left Section */
+.topbarLeft {
+  display: flex;
+  align-items: center;
+  flex: 2;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Center Section */
+.topbarCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 4;
+}
+
+.topbarList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topbarListItem {
+  margin-right: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.topbarListItem:hover {
+  color: #1e90ff;
+}
+
+/* Logout Button */
+.logout {
+  font-weight: 600;
+  color: #ff6347;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logout:hover {
+  color: #cc4b3f;
+}
+
+/* Right Section */
+.topbarRight {
+  display: flex;
+  align-items: center;
+  flex: 3;
+}
+
+/* Search Bar */
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin-right: 20px;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.searchIcon {
+  font-size: 18px;
+  color: #ccc;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* White Glow Around Search Button */
+.searchIcon:hover {
+  color: #fff;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 1);
+}
+
+/* Profile Image */
+.topbarImg {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+/* Login/Register Links */
+.topbarList {
+  display: flex;
+}
+
+.topbarLink {
+  color: inherit;
+  text-decoration: none;
+}

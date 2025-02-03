@@ -1,0 +1,154 @@
+:root {
+  --bg-color: #121212; /* Darker background for a modern dark mode */
+  --text-color: #e0e0e0; /* Softer white for better contrast */
+  --primary-color: #00bcd4; /* Bright cyan for highlights */
+  --secondary-color: #1f1f2e; /* Darker blue-gray for backgrounds */
+  --input-bg-color: #2c2c3e; /* Dark gray for input fields */
+  --input-focus-color: #3a3a5a; /* Slightly brighter gray for focused inputs */
+  --border-color: rgba(255, 255, 255, 0.2); /* Subtle border */
+  --button-hover-color: #0288d1; /* Softer hover effect */
+  --button-bg-color: #0097a7; /* Vibrant blue-green for buttons */
+  --profile-border-color: #fff; /* White border for profile pic */
+  --font-family: 'Poppins', sans-serif; /* Clean, modern font */
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.settingsWrapper {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settingsTitle {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.settingsPP {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.settingsPP > img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--profile-border-color);
+}
+
+.settingsPPIcon {
+  font-size: 32px;
+  cursor: pointer;
+  color: var(--text-color);
+  background: var(--primary-color);
+  padding: 12px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.settingsPPIcon:hover {
+  background: var(--button-hover-color);
+}
+
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settingsForm > label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.settingsForm > input,
+.settingsForm > textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--input-bg-color);
+  color: var(--text-color);
+  font-size: 18px;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.settingsForm > input:focus,
+.settingsForm > textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: var(--input-focus-color);
+}
+
+.settingsForm > textarea {
+  height: 140px;
+  resize: none;
+}
+
+.settingsSubmitButton {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--button-bg-color);
+  color: var(--text-color);
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.settingsSubmitButton:hover {
+  background: var(--button-hover-color);
+}
+
+@media (max-width: 768px) {
+  .settingsWrapper {
+    padding: 20px;
+  }
+
+  .settingsTitle {
+    font-size: 28px;
+  }
+
+  .settingsPP > img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .settingsForm > input,
+  .settingsForm > textarea {
+    font-size: 16px;
+  }
+
+  .settingsSubmitButton {
+    font-size: 16px;
+  }
+}
