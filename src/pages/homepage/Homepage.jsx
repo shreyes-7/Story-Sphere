@@ -13,7 +13,7 @@ export default function Homepage() {
       <Header />
       <div className="home">
         <Posts />
-        <Sidebar /> {/* Sidebar will automatically update from Context */}
+        <Sidebar /> {}
       </div>
     </>
   );

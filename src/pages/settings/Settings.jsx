@@ -76,7 +76,6 @@ export default function Settings() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          
         />
 
         {/* Password Input */}

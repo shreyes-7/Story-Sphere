@@ -1,50 +1,76 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom";
 import "./write.css";
 
 export default function Write({ addPost }) {
   const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
-  const [customCategory, setCustomCategory] = useState(""); // New field for custom category
-  const navigate = useNavigate(); // To navigate after publishing
+  const navigate = useNavigate();
 
-  // Handle Image Upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
+    setImageFile(file);
+    setImage(URL.createObjectURL(file));
+  };
+
+  const uploadImageToCloudinary = async () => {
+    if (!imageFile) return null;
+
+    const formData = new FormData();
+    formData.append("file", imageFile);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Image upload failed");
+
+      const data = await response.json();
+      return data.url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
     }
   };
 
-  // Handle Clear Button
-  const handleClear = () => {
-    setImage(null);
-    setTitle("");
-    setContent("");
-    setCategory("");
-    setCustomCategory("");
-  };
-
-  // Handle Submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const imageUrl = await uploadImageToCloudinary();
+    if (!imageUrl) {
+      alert("Image upload failed. Please try again.");
+      return;
+    }
+
     const newPost = {
       title,
       content,
-      category: customCategory || category,
-      image,
+      category,
+      image: imageUrl, // Store Cloudinary URL
     };
 
-    // Add new post to the homepage
-    addPost(newPost);
+    try {
+      const response = await fetch("http://localhost:5000/api/blog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPost),
+      });
 
-    // Show success alert
-    alert("Blog has been published!");
-
-    // Redirect to homepage after publishing
-    navigate("/posts");
+      if (response.ok) {
+        alert("Blog published successfully!");
+        navigate("/posts");
+      } else {
+        alert("Failed to publish blog.");
+      }
+    } catch (error) {
+      console.error("Error submitting blog:", error);
+      alert("An error occurred while submitting the blog.");
+    }
   };
 
   return (
@@ -83,8 +109,8 @@ export default function Write({ addPost }) {
             className="writeCategory"
             placeholder="Enter Category..."
             type="text"
-            value={customCategory}
-            onChange={(e) => setCustomCategory(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
 
@@ -103,9 +129,6 @@ export default function Write({ addPost }) {
         <div className="buttonGroup">
           <button className="writeSubmit" type="submit">
             <i className="fas fa-paper-plane"></i> Publish
-          </button>
-          <button className="clearButton" type="button" onClick={handleClear}>
-            <i className="fas fa-times"></i> Clear
           </button>
         </div>
       </form>

@@ -97,3 +97,48 @@
 .postTitle a:hover {
   color: #0099ff; 
 }
+
+.postOptions {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+.dots {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px;
+  background: none;
+  border: none;
+  color: #555;
+}
+
+.menu {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  background: #222;
+  border-radius: 6px;
+  padding: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 100px;
+}
+
+.deleteBtn {
+  background: #111;
+  color: red;
+  font-weight: bold;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.deleteBtn:hover {
+  background: red;
+  color: white;
+}

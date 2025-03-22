@@ -1,134 +1,113 @@
-:root {
-  --bg-color: #1c1c1c;
-  --text-color: #e0e0e0;
-  --primary-color: #ff5722;
-  --secondary-color: #444444;
-  --input-bg-color: #555555;
-  --input-focus-color: #666666;
-  --border-color: rgba(255, 255, 255, 0.4);
-  --button-bg-color: #ff5722;
-  --button-hover-color: #ff704d;
-  --font-family: 'Roboto', sans-serif;
-  --link-color: #ff5722;
-}
-
-
+/* Dark mode-inspired futuristic UI */
 body {
-  font-family: var(--font-family);
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
-.register {
-  height: calc(100vh - 50px);
+.register-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.6),
-    rgba(0, 0, 0, 0.6)
-  ),
-  url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-  background-size: cover;
-  background-position: center;
+  align-items: center;
+  width: 100%;
+}
+
+.register-box {
+  background: #161b22;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7);
+  max-width: 400px;
+  width: 100%;
   text-align: center;
-  padding: 20px;
+  border: 1px solid #30363d;
+  margin-top: 80px;
 }
 
-.registerTitle {
-  font-size: 60px;
-  color: white;
+.register-title {
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 20px;
+  color: #e6edf3;
 }
 
-.registerForm {
-  margin-top: 20px;
+.register-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-width: 400px;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(15px);
+  gap: 15px;
 }
 
-.registerForm > label {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-color);
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
-.registerInput {
-  padding: 14px;
-  background-color: var(--input-bg-color);
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  color: var(--text-color);
-  font-size: 18px;
-  transition: 0.3s;
-  box-sizing: border-box;
+.input-group label {
+  font-size: 14px;
+  color: #8b949e;
+  margin-bottom: 5px;
 }
 
-.registerInput:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  background: var(--input-focus-color);
-}
-
-.registerButton {
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: var(--button-bg-color);
-  color: var(--text-color);
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  text-align: center;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.registerButton:hover {
-  background-color: var(--button-hover-color);
-}
-
-.registerLoginButton {
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: transparent;
+.input-group input {
   padding: 12px;
-  border: 2px solid whitesmoke;
-  color: var(--primary-color);
-  border-radius: 12px;
-  font-size: 18px;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #21262d;
+  color: #e6edf3;
+  font-size: 16px;
+  outline: none;
   transition: 0.3s;
 }
 
-.registerLoginButton:hover {
-  background-color: whitesmoke;
-  color: whitesmoke;
+.input-group input:focus {
+  border-color: #58a6ff;
+  background: #161b22;
 }
 
+.submit-button {
+  background: #238636;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-button:hover {
+  background: #2ea043;
+}
+
+.toggle-button {
+  margin-top: 15px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #58a6ff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-button:hover {
+  color: #1f6feb;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .registerTitle {
-    font-size: 40px;
+  .register-box {
+    padding: 30px;
+  }
+  
+  .register-title {
+    font-size: 20px;
   }
 
-  .registerForm {
-    padding: 20px;
-  }
-
-  .registerInput {
-    font-size: 16px;
-  }
-
-  .registerButton, .registerLoginButton {
-    font-size: 16px;
+  .submit-button, .toggle-button {
+    font-size: 14px;
   }
 }
