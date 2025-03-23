@@ -8,6 +8,8 @@ const User = require("./models/user.model");
 const Blog = require("./models/blog.model");
 const postRoutes = require("./routes/postRoutes");
 const uploadRoutes = require("./upload");
+const multer = require("multer");
+const cloudinary = require("./config/cloudinary");
 
 const app = express();
 
@@ -114,6 +116,115 @@ app.delete("/api/blog/:id", async (req, res) => {
 // Use Posts Route
 app.use('/api', postRoutes);  // Mount the new route
 app.use("/api", uploadRoutes);
+
+
+
+app.get("/api/user", verifyToken, async (req, res) => {
+  try {
+      const user = await User.findById(req.userId).select("-password"); // Exclude password
+      if (!user) return res.status(404).json({ message: "User not found" });
+      res.status(200).json(user);
+  } catch (err) {
+      res.status(500).json({ message: "Error fetching user details", error: err });
+  }
+});
+
+
+
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+app.put("/api/user", verifyToken, upload.single("profilePic"), async (req, res) => {
+    try {
+        let profilePicUrl = req.body.profilePic; // Default: use existing one
+
+        if (req.file) {
+            const result = await cloudinary.uploader.upload_stream(
+                { folder: "profile_pictures" },
+                (error, result) => {
+                    if (error) return res.status(500).json({ message: "Cloudinary error", error });
+                    profilePicUrl = result.secure_url;
+                    updateUserProfile();
+                }
+            ).end(req.file.buffer);
+        } else {
+            updateUserProfile();
+        }
+
+        function updateUserProfile() {
+            User.findByIdAndUpdate(
+                req.userId,
+                {
+                    username: req.body.username,
+                    bio: req.body.bio,
+                    profilePic: profilePicUrl,
+                    socialLinks: {
+                        instagram: req.body.instagram,
+                        facebook: req.body.facebook,
+                        twitter: req.body.twitter,
+                        linkedin: req.body.linkedin,
+                        github: req.body.github,
+                    },
+                },
+                { new: true }
+            )
+                .select("-password")
+                .then((updatedUser) => res.status(200).json(updatedUser))
+                .catch((err) => res.status(500).json({ message: "Error updating profile", error: err }));
+        }
+    } catch (err) {
+        res.status(500).json({ message: "Error updating user", error: err });
+    }
+});
+app.get("/api/users/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id); // Fetch user from DB
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({ username: user.username, profilePic: user.profilePic });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.get("/api/user/profile", async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+    const decoded = jwt.verify(token, "your_secret_key");
+    const user = await User.findById(decoded.id);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({ username: user.username, profilePic: user.profilePic });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching user profile" });
+  }
+});
+
+
+// const verifyToken = require("../middleware/auth"); // Middleware to check authentication
+
+const router = express.Router();
+
+// Fetch user details
+router.get("/profile", verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select("-password"); // Exclude password
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error });
+    }
+});
+
+
+
+module.exports = router;
 
 
 // Start the server

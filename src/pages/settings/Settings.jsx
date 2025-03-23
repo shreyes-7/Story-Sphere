@@ -1,37 +1,67 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
+import axios from "axios";
 import "./settings.css";
 
 export default function Settings() {
   const { user, updateUser } = useContext(UserContext);
-  const [name, setName] = useState(user.name);
-  const [bio, setBio] = useState(user.bio);
-  const [profilePic, setProfilePic] = useState(user.profilePic);
-  const [email, setEmail] = useState(user.email || "");
+  const [name, setName] = useState(user?.username || "");
+  const [bio, setBio] = useState(user?.bio || "");
+  const [profilePic, setProfilePic] = useState(user?.profilePic || "");
+  const [email, setEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");
+  const [socialLinks, setSocialLinks] = useState(user?.socialLinks || {});
 
-  // Function to handle profile picture change
-  const handleProfilePicChange = (e) => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/user", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => {
+        const userData = res.data;
+        setName(userData.username);
+        setBio(userData.bio);
+        setProfilePic(userData.profilePic);
+        setEmail(userData.email);
+        setSocialLinks(userData.socialLinks);
+      })
+      .catch((err) => console.error("Error fetching user data:", err));
+  }, []);
+
+  // Handle profile picture upload
+  const handleProfilePicChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file); // Creates a preview URL
-      setProfilePic(imageUrl);
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("profilePic", file);
+
+    try {
+      const res = await axios.put("http://localhost:5000/api/user", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setProfilePic(res.data.profilePic);
+      alert("Profile picture updated!");
+    } catch (error) {
+      console.error("Error uploading profile picture:", error);
     }
   };
 
-  // Function to save updates
-  const handleSave = () => {
-    updateUser({ name, bio, profilePic, email });
-    alert("Profile Updated Successfully!");
-  };
-
-  // Function to handle password change
-  const handlePasswordChange = () => {
-    if (password) {
-      alert("Password changed successfully!");
-      setPassword("");
-    } else {
-      alert("Please enter a new password.");
+  // Save all updates
+  const handleSave = async () => {
+    try {
+      await axios.put(
+        "http://localhost:5000/api/user",
+        { username: name, bio, profilePic, ...socialLinks },
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      );
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile:", error);
     }
   };
 
@@ -43,9 +73,7 @@ export default function Settings() {
         {/* Profile Picture Section */}
         <div className="settingsPP">
           <img src={profilePic} alt="Profile" className="settingsPPImg" />
-          <label htmlFor="fileInput" className="settingsPPIcon">
-            📸
-          </label>
+          <label htmlFor="fileInput" className="settingsPPIcon">📷</label>
           <input
             type="file"
             id="fileInput"
@@ -54,50 +82,32 @@ export default function Settings() {
           />
         </div>
 
-        {/* Name Input */}
+        {/* Username */}
         <label>Username</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
 
-        {/* Bio Input */}
+        {/* Bio */}
         <label>Bio</label>
-        <textarea
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          rows={6}
-        ></textarea>
+        <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={6}></textarea>
 
-        {/* Email Input */}
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        {/* Password Input */}
-        <label>Change Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        {/* Social Media Links */}
+        <h3 className="socialLinksTitle">Social Media Links</h3>
+        {Object.keys(socialLinks).map((platform) => (
+          <div key={platform}>
+            <label>{platform.charAt(0).toUpperCase() + platform.slice(1)}</label>
+            <input
+              type="text"
+              value={socialLinks[platform]}
+              onChange={(e) =>
+                setSocialLinks({ ...socialLinks, [platform]: e.target.value })
+              }
+            />
+          </div>
+        ))}
 
         {/* Save Button */}
         <button className="settingsSubmitButton" onClick={handleSave}>
           Save Changes
-        </button>
-
-        {/* Change Password Button */}
-        <button
-          className="settingsSubmitButton"
-          onClick={handlePasswordChange}
-          style={{ background: "#ff4500" }}
-        >
-          Change Password
         </button>
       </div>
     </div>

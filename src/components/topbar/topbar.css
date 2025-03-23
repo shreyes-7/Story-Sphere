@@ -24,6 +24,7 @@
 
 .logoLink {
   display: flex;
+  filter: invert(1);
   align-items: center;
 }
 
@@ -92,11 +93,18 @@
 
 .searchInput {
   border: none;
-  outline: none;
+  outline: none; /* Removes default focus outline */
   background: transparent;
   color: #fff;
   padding: 5px;
   font-size: 16px;
+  box-shadow: none; /* Ensures no shadow appears */
+}
+
+.searchInput:focus {
+  border: none;
+  outline: none;
+  box-shadow: none; /* Prevents any focus effect */
 }
 
 .searchIcon {

@@ -1,157 +1,166 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #121212;
-  color: #e0e0e0;
+/* Settings Page Container */
+.settings {
+  width: 50%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 25px;
+  background: rgba(30, 30, 30, 0.85);
+  border-radius: 15px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.settings {
+/* Settings Wrapper */
+.settingsWrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  gap: 18px;
   padding: 20px;
 }
 
-.settingsWrapper {
-  width: 100%;
-  max-width: 700px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+/* Title Styling */
 .settingsTitle {
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 26px;
+  color: #e0f7fa;
   text-align: center;
-  color: #00bcd4;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #00e5ff, #00bcd4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-input{
-  height:1.8rem;
-  border:3px solid black;
-  border-radius:10px;
-  background-color: #9fabb1;
-  
-}
-
+/* Profile Picture Section */
 .settingsPP {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  justify-content: center;
+  gap: 10px;
 }
 
-.settingsPP > img {
-  width: 120px;
-  height: 120px;
+.settingsPPImg {
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Minimalistic style for settingsPPIcon */
+.settingsPPImg:hover {
+  transform: scale(1.05);
+}
+
+/* File Upload Button */
 .settingsPPIcon {
-  font-size: 28px;
+  font-size: 20px;
   cursor: pointer;
-  color: white;
+  color: #00e5ff;
+  background: rgba(255, 255, 255, 0.15);
   padding: 8px;
-  border: 2px solid white;
   border-radius: 50%;
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .settingsPPIcon:hover {
-  color: #00bcd4;
-  border-color: #00bcd4;
+  background: #6c7f81;
+  color: #121212;
+  transform: scale(1.1);
 }
 
-.settingsForm {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* Input Fields */
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e0f7fa;
+  margin-top: 10px;
 }
 
-.settingsForm > label {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-textarea{
-  background-color: #9fabb1;
-
-}
-
-.settingsForm > input,
-.settingsForm > textarea {
+input,
+textarea {
   width: 100%;
-  padding: 18px;
-  border: 2px solid black; /* Solid black border */
-  border-radius: 10px;
-  background: #2c2c3e;
-  color: white;
-  font-size: 18px;
-  transition: 0.3s;
-  box-sizing: border-box;
-  background-color: #9fabb1;
-}
-
-.settingsForm > input:focus,
-.settingsForm > textarea:focus {
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 16px;
   outline: none;
-  border-color: #00bcd4;
-  background: #3a3a5a;
+  transition: all 0.3s ease-in-out;
 }
 
-.settingsForm > textarea {
-  height: 160px; /* Increased height */
-  resize: none;
-  background-color: #a9d0e5;
+input:focus,
+textarea:focus {
+  border: 1px solid #00e5ff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
+/* Buttons */
 .settingsSubmitButton {
-  width: 100%;
-  padding: 16px;
+  padding: 12px;
   border: none;
-  border-radius: 10px;
-  background: #0097a7;
+  border-radius: 6px;
+  font-size: 17px;
+  font-weight: bold;
   color: white;
-  font-size: 18px;
+  background: linear-gradient(45deg, #00bcd4, #0097a7);
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
 }
 
 .settingsSubmitButton:hover {
-  background: #0288d1;
+  background: linear-gradient(45deg, #0097a7, #00838f);
+  box-shadow: 0px 4px 10px rgba(0, 230, 255, 0.3);
 }
 
+/* Social Media Links Section */
+.socialLinksContainer {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.socialLinksTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e0f7fa;
+  margin-bottom: 10px;
+}
+
+/* Social Media Input Fields */
+.socialInput {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.socialInput:focus {
+  border-color: #00e5ff;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .settingsWrapper {
-    padding: 20px;
+  .settings {
+    width: 90%;
   }
 
   .settingsTitle {
-    font-size: 28px;
-  }
-
-  .settingsPP > img {
-    width: 90px;
-    height: 90px;
-  }
-
-  .settingsForm > input,
-  .settingsForm > textarea {
-    font-size: 16px;
+    font-size: 22px;
   }
 
   .settingsSubmitButton {
-    font-size: 16px;
+    font-size: 15px;
   }
 }

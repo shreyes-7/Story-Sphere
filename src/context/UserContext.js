@@ -1,23 +1,54 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
+import axios from "axios";
 
 // Create User Context
 export const UserContext = createContext();
 
 // Context Provider Component
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "Username",
-    profilePic: "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg", // Default profile picture
-    bio: "Hii I'm a passionate blog writer who loves sharing insights, stories, and ideas through engaging content. I enjoy exploring new topics, researching in-depth, and crafting articles that inform and inspire readers.I aim to create content that adds value and sparks curiosity. When I'm not writing, you'll likely find me reading, brainstorming new ideas, or enjoying a good cup of coffee.",
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Function to update user data
-  const updateUser = (newData) => {
-    setUser((prevUser) => ({ ...prevUser, ...newData }));
+  // Fetch user details from the backend
+  const fetchUser = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);  // Ensure user is set to null when there's no token
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get("http://localhost:5000/api/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      setUser(null);
+    }
+    setLoading(false);
+  }, []);
+
+  // Fetch user when the component mounts
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
+  // Function to log in the user and update the state
+  const loginUser = async (token) => {
+    localStorage.setItem("token", token);
+    await fetchUser(); // Re-fetch user after login
+  };
+
+  // Function to log out the user
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    setUser(null); // Immediately update UI
   };
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, loading, fetchUser, loginUser, logoutUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,14 +1,14 @@
-/* Sidebar Styles */
+/* Sidebar */
 .sidebar {
   flex: 3;
-  padding: 20px;
-  background: #1e1e2e;
+  padding: 22px;
+  background: #1b1f30;
   color: #ffffff;
-  border-radius: 12px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.7);
   position: sticky;
   top: 20px;
   margin-top: 20px;
@@ -23,120 +23,210 @@
 }
 
 .profilePic {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  border: 3px solid #394053;
 }
 
 .profileName {
   font-size: 22px;
   font-weight: bold;
-  color: #00e0ff;
+  color: #ffffff;
 }
 
 .profileBio {
-  font-size: 14px;
-  color: #b0b0b0;
+  font-size: 15px;
+  color: #a6b0cf;
   text-align: center;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 /* Saved Collections */
 .savedCollections {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .collectionsList {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .collectionItem {
   text-decoration: none;
-  color: #ff3e7f;
-  background: rgba(255, 62, 127, 0.2);
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
+  color: #ffffff;
+  background: #24283b;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 16px;
   font-weight: bold;
   transition: 0.3s ease-in-out;
+  text-align: center;
+  border: 1px solid #394053;
 }
 
 .collectionItem:hover {
-  background: #ff3e7f;
-  color: white;
+  background: #3d4463;
 }
 
 /* Trending Categories */
 .sidebarCategories {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 35px;
 }
 
 .sidebarTitle {
-  margin-bottom: 15px;
-  padding: 10px;
-  width: 100%;
+  margin-bottom: 18px;
+  padding: 12px;
+  width: 95%;
   text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  background: linear-gradient(45deg, #00e0ff, #ff3e7f);
+  font-size: 17px;
+  font-weight: bold;
+  background: #0d0e14;
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1px solid #394053;
 }
 
 /* Sidebar Category Links */
 .sidebarCategoryList {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .sidebarCategory {
   text-decoration: none;
-  color: #00e0ff;
-  background: rgba(0, 224, 255, 0.2);
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 14px;
+  color: #ffffff;
+  background: #24283b;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 16px;
   font-weight: bold;
   transition: 0.3s ease-in-out;
+  text-align: center;
+  border: 1px solid #394053;
 }
 
 .sidebarCategory:hover {
-  background: #ff3e7f;
-  color: white;
+  background: #3d4463;
+}
+
+
+
+/* Skeleton Animation */
+@keyframes skeleton-loading {
+  0% { background-color: #3d4463; }
+  50% { background-color: #4c556b; }
+  100% { background-color: #3d4463; }
+}
+
+/* Skeleton Common Styles */
+.skeleton {
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+  border-radius: 5px;
+}
+
+/* Profile Skeleton */
+.skeleton-profilePic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.skeleton-name {
+  width: 60%;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.skeleton-bio {
+  width: 90%;
+  height: 35px;
+  margin-bottom: 12px;
+}
+
+/* Skeleton for Saved Collections */
+.skeleton-collection,
+.skeleton-category {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Skeleton for Social Media Icons */
+.skeleton-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin: 5px;
 }
 
 /* Social Media Icons */
+/* Social Media Section */
 .sidebarSocial {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.sidebarSocial h3 {
+  text-align: center;
+  width: 100%;
+}
+
+/* Social Media Icons Container */
+.socialIcons {
+  display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 14px;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  margin-top: 10px;
 }
 
-.sidebarSocial a {
+/* Individual Social Icons */
+.socialIcon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 22px;
+  background: #ffffff; /* White background */
+  color: #000000; /* Black icon */
+  border: 2px solid #000000; /* Black border */
   text-decoration: none;
+  transition: all 0.3s ease-in-out;
 }
 
-.sidebarIcon {
-  font-size: 24px;
-  color: #00e0ff;
-  transition: 0.3s ease-in-out;
+/* Hover effect */
+.socialIcon:hover {
+  background: #000000; /* Black background */
+  color: #ffffff; /* White icon */
+  transform: scale(1.1);
 }
 
-.sidebarIcon:hover {
-  color: #ff3e7f;
-  transform: scale(1.2);
+/* Responsive Spacing */
+@media (max-width: 768px) {
+  .socialIcons {
+    gap: 10px;
+  }
+  .socialIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
 }
+
 
 /* Loading */
 .loading {
